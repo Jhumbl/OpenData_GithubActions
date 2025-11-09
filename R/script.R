@@ -9,7 +9,17 @@ suppressPackageStartupMessages({
 dir.create("data", showWarnings = FALSE, recursive = TRUE)
 
 # Call World Time API (changes every second)
-req <- request("https://worldtimeapi.org/api/timezone/Etc/UTC")
+req <- request("https://worldtimeapi.org/api/timezone/Etc/UTC") |>
+  req_user_agent("gh-actions-test/1.0") |>
+  req_timeout(15) |>
+  req_retry(
+    max_tries = 5,                   # try up to 5 times
+    backoff = ~ min(60, 2^.x),       # 1s, 2s, 4s, 8s, 16s
+    is_transient = function(resp) {
+      # retry 5xx and curl-level errors
+      httr2::resp_is_error(resp) || inherits(resp, "httr2_rerun")
+    }
+  )
 resp <- req_perform(req)
 resp_check_status(resp)
 
