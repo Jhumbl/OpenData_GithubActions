@@ -58,6 +58,7 @@ fetch_worldtime <- function() {
 #  mutate(fetched_utc = format(Sys.time(), tz = "UTC", usetz = TRUE))
 
 df <- fetch_worldtime()
+print(df)
 
 # Write a single CSV (the Action will commit it if changed)
 readr::write_csv(df, "data/data.csv", na = "")
