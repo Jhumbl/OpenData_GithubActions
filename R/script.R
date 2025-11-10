@@ -10,6 +10,7 @@ dir.create("data", showWarnings = FALSE, recursive = TRUE)
 
 # Call World Time API (changes every second)
 req <- request("https://worldtimeapi.org/api/timezone/Etc/UTC") |>
+  req_verbose() |>
   req_user_agent("gh-actions-test/1.0") |>
   req_timeout(15) |>
   req_retry(
