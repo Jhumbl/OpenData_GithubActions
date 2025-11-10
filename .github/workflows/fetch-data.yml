@@ -2,7 +2,7 @@ name: Fetch data (monthly)
 
 on:
   schedule:
-    - cron: "50 * * * *"   # 00:00 UTC on the 1st of every month
+    - cron: "50 */3 * * *"   # 00:00 UTC on the 1st of every month
   workflow_dispatch: {}    # allow manual runs from the Actions tab
 
 permissions:
