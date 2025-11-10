@@ -1,2 +1,2 @@
-datetime,unixtime,fetched_utc,status
-,,2025-11-10T22:57:14Z,error
+datetime,unixtime,utc_offset,day_of_week,day_of_year,week_number,fetched_utc
+2025-11-10T23:01:09.886052+00:00,1762815669,+00:00,1,314,46,2025-11-10T23:01:09Z
