@@ -28,12 +28,20 @@ fetch_worldtime <- function() {
                         day_of_week = j$day_of_week,
                         day_of_year = j$day_of_year,
                         week_number = j$week_number,
-                        fetched_utc = Sys.time()))
+                        fetched_utc = Sys.time(),
+                        status = "success"))
     }
     Sys.sleep(2 ^ i)
   }
   # fallback so it never fails
-  data.frame(datetime = NA, unixtime = NA, fetched_utc = Sys.time(), status = "error")
+  data.frame(datetime = NA,
+             unixtime = NA,
+             utc_offset  = NA,
+             day_of_week = NA,
+             day_of_year = NA,
+             week_number = NA,
+             fetched_utc = Sys.time(),
+             status = "error")
 }
 
 #j <- resp_body_json(resp, simplifyVector = TRUE)
@@ -59,6 +67,8 @@ fetch_worldtime <- function() {
 
 df <- fetch_worldtime()
 print(df)
+
+historical_df <- read_csv("data/data.csv")
 
 # Write a single CSV (the Action will commit it if changed)
 readr::write_csv(df, "data/data.csv", na = "")
