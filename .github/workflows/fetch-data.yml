@@ -29,6 +29,7 @@ jobs:
             any::dplyr
             any::httr2
             any::jsonlite
+            any::lubridate
           use-public-rspm: true
 
       - name: Run script
