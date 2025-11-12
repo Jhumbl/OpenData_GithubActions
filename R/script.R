@@ -4,6 +4,7 @@ suppressPackageStartupMessages({
   library(readr)
   library(dplyr)
   library(httr2)
+  library(lubridate)
 })
 
 fetch_worldtime <- function() {
@@ -71,7 +72,7 @@ print(df)
 historical_df <- read_csv("./data/data.csv")
 print(historical_df)
 
-df <- bind_rows(historical_df, df)
+df <- bind_rows(historical_df, df |> mutate(datetime = lubridate::ymd_hms(datetime)))
 print(df)
 
 # Write a single CSV (the Action will commit it if changed)
