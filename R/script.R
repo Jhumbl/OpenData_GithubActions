@@ -68,7 +68,11 @@ fetch_worldtime <- function() {
 df <- fetch_worldtime()
 print(df)
 
-historical_df <- read_csv("data/data.csv")
+historical_df <- read_csv("./data/data.csv")
+print(historical_df)
+
+df <- bind_rows(historical_df, df)
+print(df)
 
 # Write a single CSV (the Action will commit it if changed)
 readr::write_csv(df, "data/data.csv", na = "")
